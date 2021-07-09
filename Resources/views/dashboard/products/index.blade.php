@@ -9,11 +9,11 @@
 @endsection
 
 @section('breadcrumb-title')
-<h3>Product Status</h3>
+<h3>Products </h3>
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item">Product Status</li>
+<li class="breadcrumb-item">Products</li>
 <li class="breadcrumb-item active">All</li>
 @endsection
 
