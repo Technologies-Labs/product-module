@@ -6,5 +6,5 @@ namespace Modules\ProductModule\Enum;
 
 class ProductImageEnum
 {
-    const PRODUCT_IMAGES_PATH = 'images/product_images';
+    const PRODUCT_IMAGES_PATH = 'assets/images/product_images';
 }

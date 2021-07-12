@@ -32,8 +32,8 @@ class ProductController extends Controller
     //    $this->middleware('permission:product-edit'   ,['only' => ['edit','update']]);
     //    $this->middleware('permission:product-delete' ,['only' => ['destroy']]);
 
-       $this->productStatuses =ProductStatus::all();
-        //$this->categories   =Category::all();
+        $this->productStatuses =ProductStatus::all();
+        $this->categories      =Category::all();
     }
     /**
      * Display a listing of the resource.
@@ -46,7 +46,7 @@ class ProductController extends Controller
             $products = Product::get();
             return datatables($products)->make(true);
         }
-        
+
         return view('productmodule::dashboard.products.index');
     }
     public function getProducts()
@@ -105,7 +105,11 @@ class ProductController extends Controller
                 $productImage->createProductImage();
             }
         }
-        return 'saved';
+        if($newProduct)
+        return response()->json([
+            'status'=>true,
+            'msg'=>'تم انشاء منتج بنجاح',
+        ]);
     }
 
     /**
