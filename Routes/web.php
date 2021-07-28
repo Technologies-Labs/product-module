@@ -11,17 +11,24 @@
 |
 */
 use Illuminate\Support\Facades\Route;
-use Modules\ProductModule\Http\Controllers\ProductController;
 
-/////////////        products   ////////////////////
+
+//  products  //
+
  Route::resource('products', 'ProductController');
- Route::get('product/images/delete/{id}', 'ProductController@deleteProductImage')->name('product.images.delete');
- Route::get('get/products', 'ProductController@getProducts')->name('products.all');
- Route::get('user_products/{id}',function(){
-    return view('productmodule::website.index');
-});
+ Route::prefix('products')->group(function(){
+
+    Route::get('/user_products/{id}','ProductController@getUserProducts')->name('user.products');
+    Route::get('/delete/{id}','ProductController@destroy')->name('product.delete');
+    Route::get('/image/delete/{id}','ProductController@deleteProductImage')->name('product.image.delete');
+
+ });
+
+
 /////////////        product status  /////////////////////
 Route::prefix('productStatuses')->group(function() {
     Route::get('/delete/{id}','ProductStatusController@destroy');
 });
    Route::resource('productStatuses', 'ProductStatusController');
+
+/////////////    product status  /////////////////////

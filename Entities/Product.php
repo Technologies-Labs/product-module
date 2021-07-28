@@ -17,9 +17,7 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $softDelete = true;
-    protected $dates = ['deleted_at'];
-
+    
     protected $fillable = [
         'name',
         'description',
@@ -72,7 +70,7 @@ class Product extends Model
 
     public function status()
     {
-        return $this->belongsTo(ProductStatus::class);
+        return $this->belongsTo(ProductStatus::class,'product_status_id');
     }
 
 

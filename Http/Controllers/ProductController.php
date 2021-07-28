@@ -2,6 +2,7 @@
 
 namespace Modules\ProductModule\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -49,26 +50,26 @@ class ProductController extends Controller
 
         return view('productmodule::dashboard.products.index');
     }
-    public function getProducts()
-    {
-        $products = Product::get();
-        return datatables($products)
-        ->addColumn('action', function($products){
-            return view('productmodule::dashboard.products.action',compact('products'));
-        })
-        ->rawColumns(['action'])
-        ->make(true);
-    }
+    // public function getProducts()
+    // {
+    //     $products = Product::get();
+    //     return datatables($products)
+    //     ->addColumn('action', function($products){
+    //         return view('productmodule::dashboard.products.action',compact('products'));
+    //     })
+    //     ->rawColumns(['action'])
+    //     ->make(true);
+    // }
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
     public function create()
     {
-        return view('productmodule::website.create',
+        return view('productmodule::website.products.create',
         [
             'productStatuses'=>$this->productStatuses,
-            'categories'=>$this->categories,
+            'categories'     =>$this->categories,
         ]);
     }
 
@@ -89,11 +90,9 @@ class ProductController extends Controller
                         ->setProductStatusID($request->product_status_id)
                         ->setDescription    ($request->description)
                         ->setIsOffer        ($request->is_offer)
-                        ->setOfferRatio     ($request->offer_ratio);
-                        $productService->setImage($request->image);
-                        if($request->has('image')){
-                            $productService->setImage($request->image);
-                        }
+                        ->setOfferRatio     ($request->offer_ratio)
+                        ->setImage          ($request->image);
+
         $newProduct= $productService->createProduct();
 
         if ($request->hasfile('product_images')) {
@@ -120,11 +119,12 @@ class ProductController extends Controller
     public function show($id)
     {
      $product= Product::find($id);
+
      if(!$product){
         return 'product not found';
-    }
-      return $product;
-        // return view('productmodule::website.show',compact('product'));
+     }
+
+    return view('productmodule::website.products.show',compact('product'));
     }
 
     /**
@@ -139,7 +139,7 @@ class ProductController extends Controller
             return 'product not found';
         }
         $productStatuses = ProductStatus::get();
-        return view('productmodule::website.edit',
+        return view('productmodule::website.products.edit',
         [
             'product'         =>$product,
             'productStatuses' =>$this->productStatuses,
@@ -187,7 +187,7 @@ class ProductController extends Controller
             }
         }
 
-         return $updatedProduct->name;
+         return redirect()->back();
     }
 
     /**
@@ -219,8 +219,22 @@ class ProductController extends Controller
             return 'product image not found';
         }
 
-        return $this->deleteImage($image->image);
+        $this->deleteImage($image->image);
+        $image->delete();
 
+        return redirect()->back();
+
+    }
+
+    public function getUserProducts($id){
+
+        $user = User::with('products')->find($id);
+        if(!$user)
+        {
+            return 'User not found';
+        }
+
+        return view('productmodule::website.products.index',['user'=>$user]);
     }
 
 

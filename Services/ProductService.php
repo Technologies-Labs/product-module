@@ -89,7 +89,7 @@ class ProductService{
      */
     public function setImage($image)
     {
-        if(isNull($image) ){
+        if(!($image) ){
             $this->image=ProductEnum::PRODUCT_DEFAULT_IMAGE;
         }else
         $this->image =$this->storeImage($image,ProductEnum::PRODUCT_IMAGE_PATH);
