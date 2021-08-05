@@ -33,8 +33,8 @@ class ProductController extends Controller
     //    $this->middleware('permission:product-edit'   ,['only' => ['edit','update']]);
     //    $this->middleware('permission:product-delete' ,['only' => ['destroy']]);
 
-        $this->productStatuses =ProductStatus::all();
-        $this->categories      =Category::all();
+        $this->productStatuses = ProductStatus::all();
+        $this->categories      = Category::all();
     }
     /**
      * Display a listing of the resource.
