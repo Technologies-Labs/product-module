@@ -11,24 +11,35 @@
 |
 */
 use Illuminate\Support\Facades\Route;
+use \Modules\ProductModule\Http\Controllers\ProductController;
 
+/**
+ * Dashboard Routes
+*/
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    /* Products */
+    Route::resource('products', 'ProductController');
 
-//  products  //
+    /* Products Status */
+    Route::resource('productStatuses', 'ProductStatusController');
+    Route::prefix('productStatuses')->group(function() {
+        Route::get('/delete/{id}','ProductStatusController@destroy');
+    });
 
- Route::resource('products', 'ProductController');
- Route::prefix('products')->group(function(){
-
-    Route::get('/user_products/{id}','ProductController@getUserProducts')->name('user.products');
-    Route::get('/delete/{id}','ProductController@destroy')->name('product.delete');
-    Route::get('/image/delete/{id}','ProductController@deleteProductImage')->name('product.image.delete');
-
- });
-
-
-/////////////        product status  /////////////////////
-Route::prefix('productStatuses')->group(function() {
-    Route::get('/delete/{id}','ProductStatusController@destroy');
 });
-   Route::resource('productStatuses', 'ProductStatusController');
 
-/////////////    product status  /////////////////////
+/**
+ * Website Routes
+ */
+Route::middleware(['auth'])->group(function () {
+
+    Route::prefix('products')->group(function(){
+
+        Route::middleware(['auth'])->group(function () {
+            Route::get('/user',[ProductController::class , 'getUserProducts'])->name('user.products');
+            Route::get('/delete/{id}',[ProductController::class , 'destroy'])->name('product.delete');
+            Route::get('/image/delete/{id}',[ProductController::class , 'deleteProductImage'])->name('product.image.delete');
+        });
+
+    });
+});

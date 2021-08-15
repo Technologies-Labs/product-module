@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\ProductModule\Http\Requests\ProductRequest;
+use Modules\ProductModule\Repositories\ProductRepository;
 use Modules\ProductModule\Services\ProductService;
 use App\Traits\UploadTrait;
 use Modules\ProductModule\Entities\Product;
@@ -24,6 +25,7 @@ class ProductController extends Controller
 
     private $productStatuses;
     private $categories;
+    private $productRepository;
 
     public function __construct(){
 
@@ -33,17 +35,14 @@ class ProductController extends Controller
     //    $this->middleware('permission:product-edit'   ,['only' => ['edit','update']]);
     //    $this->middleware('permission:product-delete' ,['only' => ['destroy']]);
 
-        $this->productStatuses =ProductStatus::all();
-        $this->categories      =Category::all();
+        $this->productStatuses          = ProductStatus::all();
+        $this->categories               = Category::all();
+        $this->productRepository        = New ProductRepository();
     }
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
+
     public function index()
     {
         if(request()->ajax()){
-
             $products = Product::get();
             return datatables($products)->make(true);
         }
@@ -60,10 +59,7 @@ class ProductController extends Controller
     //     ->rawColumns(['action'])
     //     ->make(true);
     // }
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
+
     public function create()
     {
         return view('productmodule::website.products.create',
@@ -73,11 +69,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
     public function store(ProductRequest $request)
     {
         $productService =new ProductService();
@@ -111,11 +102,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
     public function show($id)
     {
      $product= Product::find($id);
@@ -127,11 +113,6 @@ class ProductController extends Controller
     return view('productmodule::website.products.show',compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
     public function edit($id)
     {
         $product= Product::find($id);
@@ -147,13 +128,6 @@ class ProductController extends Controller
         ]);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
     public function update(ProductRequest $request, $id)
     {
         $product = Product::find($id);
@@ -190,11 +164,6 @@ class ProductController extends Controller
          return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
     public function destroy($id)
     {
         $product = Product::find($id);
@@ -206,11 +175,6 @@ class ProductController extends Controller
         return $product->delete();
     }
 
-      /**
-     * Remove the specified product image storage.
-     * @param int $id
-     * @return Renderable
-     */
     public function deleteProductImage($id)
     {
         $image = ProductImage::find($id);
@@ -226,15 +190,13 @@ class ProductController extends Controller
 
     }
 
-    public function getUserProducts($id){
+    public function getUserProducts()
+    {
+        $data           = $this->productRepository->getUserProducts(Auth::user());
+        $categories     = Category::all();
+        $statuses       = ProductStatus::all();
 
-        $user = User::with('products')->find($id);
-        if(!$user)
-        {
-            return 'User not found';
-        }
-
-        return view('productmodule::website.products.index',['user'=>$user]);
+        return view('productmodule::website.products.index', compact('data','categories', 'statuses'));
     }
 
 
