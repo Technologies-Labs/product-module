@@ -17,7 +17,7 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
     protected $fillable = [
         'name',
         'description',
@@ -72,7 +72,6 @@ class Product extends Model
     {
         return $this->belongsTo(ProductStatus::class,'product_status_id');
     }
-
 
 
 
