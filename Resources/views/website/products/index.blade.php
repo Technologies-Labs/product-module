@@ -13,9 +13,7 @@
         @endif
 
         <div class="loadMore">
-           @foreach ($data['products'] as $product)
-                <livewire:productmodule::show-product :user="$user" :product="$product" :isCurrantUser="$isCurrantUser" />
-           @endforeach
+            <livewire:productmodule::product-list :data="$data" />
         </div>
     </div>
     @include('productmodule::website.products.modals.create')
