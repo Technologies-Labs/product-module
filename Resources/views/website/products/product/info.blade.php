@@ -8,15 +8,18 @@
                 <ins>52</ins>
             </span>
         </li>
-        <li>
+        @if(!$isCurrantUser)
+            <li>
             <span class="like  fav" data-toggle="tooltip" title="like">
                 <i class="fa fa-heart"  onclick="addAlert('اسم الصنف','تمت الاضافةالمفضلة','fav')"></i>
                 <ins>2.2k</ins>
             </span>
-        </li>
-        <li>
-            <livewire:productmodule::cart.cart :product="$product" :wire:key="$product->id" :cart="$cart" :items="$items" :cssClass="$cssClass"/>
-        </li>
+            </li>
+            <li>
+                <livewire:productmodule::cart.cart :product="$product" :wire:key="$product->id" :cart="$cart" :items="$items" :cssClass="$cssClass"/>
+            </li>
+        @endif
+
         @include('productmodule::website.products.product.social_media')
 
     </ul>
