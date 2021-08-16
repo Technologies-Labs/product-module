@@ -190,13 +190,21 @@ class ProductController extends Controller
 
     }
 
-    public function getUserProducts()
+    public function getUserProducts($name)
     {
-        $data           = $this->productRepository->getUserProducts(Auth::user());
+        $user           = User::where('name' , $name)->first();
+        if (!$user){
+            abort(404);
+        }
+
+        $currantUser    = Auth::user();
+        $isCurrantUser  = $currantUser->name === $user->name;
+
+        $data           = $this->productRepository->getUserProducts($user);
         $categories     = Category::all();
         $statuses       = ProductStatus::all();
 
-        return view('productmodule::website.products.index', compact('data','categories', 'statuses'));
+        return view('productmodule::website.products.index', compact('data','user','categories', 'statuses','isCurrantUser'));
     }
 
 

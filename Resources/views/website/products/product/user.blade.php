@@ -3,7 +3,11 @@
         <img src="{{asset($user->image)}}" alt="">
     </figure>
     <div class="friend-name ">
-        <ins ><a href="" title="">{{$user->name}}</a></ins>
+        <ins >
+            @if ($user->is_verified)
+                <img src="{{ asset('assets/images/checkmark.svg') }}"/>
+            @endif
+            <a href="" title="">{{$user->name}}</a></ins>
         <span>published: {{$product->created_at}}</span>
     </div>
 </div>

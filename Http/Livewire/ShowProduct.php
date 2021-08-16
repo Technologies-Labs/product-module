@@ -11,6 +11,7 @@ class ShowProduct extends Component
     public $items;
     public $cart;
     public $cssClass;
+    public $isCurrantUser;
 
     public function render()
     {
