@@ -55,7 +55,7 @@ class Product extends Model
 
     public function favorites()
     {
-        return $this->belongsToMany(Favorite::class,'favorite_product');
+        return $this->belongsToMany(User::class,'favorites');
     }
 
     public function comments()

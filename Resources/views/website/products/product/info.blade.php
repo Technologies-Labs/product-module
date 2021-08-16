@@ -15,7 +15,7 @@
             </span>
         </li>
         <li>
-            <i class="fa  fa-shopping-cart"></i>
+            <livewire:productmodule::cart.cart :product="$product" :wire:key="$product->id" :cart="$cart" :items="$items" :cssClass="$cssClass"/>
         </li>
         @include('productmodule::website.products.product.social_media')
 

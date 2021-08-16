@@ -12,9 +12,7 @@
     <div class="col-lg-6">
         @include('productmodule::website.products.btns.create')
         <div class="loadMore">
-           @foreach ($data['products'] as $product)
-                <livewire:productmodule::show-product :user="$data['user']" :product="$product" />
-           @endforeach
+            <livewire:productmodule::product-list :data="$data" />
         </div>
     </div>
     @include('productmodule::website.products.modals.create')
