@@ -5,8 +5,9 @@
                 <div class="row">
 
                     @include('productmodule::website.products.product.user')
-
-                    @include('productmodule::website.products.product.actions')
+                    @if($isCurrantUser)
+                        @include('productmodule::website.products.product.actions')
+                    @endif
                 </div>
             </div>
 

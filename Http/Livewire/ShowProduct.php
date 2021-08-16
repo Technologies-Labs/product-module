@@ -8,6 +8,7 @@ class ShowProduct extends Component
 {
     public $user;
     public $product;
+    public $isCurrantUser;
 
     public function render()
     {

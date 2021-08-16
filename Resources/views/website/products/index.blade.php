@@ -1,8 +1,6 @@
 @extends('layouts.simple.master')
 
-@section('user-profile')
-    @widget('user-profile', ['user_id'   =>  $data['user']->id])
-@endsection
+@include('usermodule::components.user_profile.index')
 
 @section('left-sidebar')
     @include('layouts.simple.left-sidebar')
@@ -10,10 +8,13 @@
 
 @section('content')
     <div class="col-lg-6">
-        @include('productmodule::website.products.btns.create')
+        @if($isCurrantUser)
+            @include('productmodule::website.products.btns.create')
+        @endif
+
         <div class="loadMore">
            @foreach ($data['products'] as $product)
-                <livewire:productmodule::show-product :user="$data['user']" :product="$product" />
+                <livewire:productmodule::show-product :user="$user" :product="$product" :isCurrantUser="$isCurrantUser" />
            @endforeach
         </div>
     </div>
