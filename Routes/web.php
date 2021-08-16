@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('products')->group(function(){
 
         Route::middleware(['auth'])->group(function () {
-            Route::get('/user',[ProductController::class , 'getUserProducts'])->name('user.products');
+            Route::get('/user/{name}',[ProductController::class , 'getUserProducts'])->name('user.products');
             Route::get('/delete/{id}',[ProductController::class , 'destroy'])->name('product.delete');
             Route::get('/image/delete/{id}',[ProductController::class , 'deleteProductImage'])->name('product.image.delete');
         });

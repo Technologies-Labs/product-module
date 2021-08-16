@@ -12,7 +12,6 @@ class ProductRepository implements ProductRepositoryInterface
 {
     public function getUserProducts(User $user)
     {
-
         return [
             'user'      => $user,
             'products'  => $user->products()->paginate(10)
