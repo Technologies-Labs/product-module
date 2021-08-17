@@ -9,10 +9,7 @@
             </span>
         </li>
         <li>
-            <span class="like  fav" data-toggle="tooltip" title="like">
-                <i class="fa fa-heart"  onclick="addAlert('اسم الصنف','تمت الاضافةالمفضلة','fav')"></i>
-                <ins>2.2k</ins>
-            </span>
+            <livewire:productmodule::favorite.favorite :product="$product" :wire:key="$product->id" :favorites="$favorites" :favoriteCssClass="$favoriteCssClass"/>
         </li>
         <li>
             <livewire:productmodule::cart.cart :product="$product" :wire:key="$product->id" :cart="$cart" :items="$items" :cssClass="$cssClass"/>
