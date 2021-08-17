@@ -8,12 +8,14 @@
                 <ins>52</ins>
             </span>
         </li>
-        <li>
-            <livewire:productmodule::favorite.favorite :product="$product" :wire:key="$product->id" :favorites="$favorites" :favoriteCssClass="$favoriteCssClass"/>
-        </li>
-        <li>
-            <livewire:productmodule::cart.cart :product="$product" :wire:key="$product->id" :cart="$cart" :items="$items" :cssClass="$cssClass"/>
-        </li>
+        @if(!$isCurrantUser)
+            <li>
+                <livewire:productmodule::favorite.favorite :product="$product" :wire:key="$product->id" :favorites="$favorites" :favoriteCssClass="$favoriteCssClass"/>
+            </li>
+            <li>
+                <livewire:productmodule::cart.cart :product="$product" :wire:key="$product->id" :cart="$cart" :items="$items" :cssClass="$cssClass"/>
+            </li>
+        @endif
         @include('productmodule::website.products.product.social_media')
 
     </ul>

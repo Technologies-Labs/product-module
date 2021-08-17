@@ -16,15 +16,19 @@ class ProductList extends Component
     public  $cart;
     public  $items;
     public  $favorites;
+    public  $currantUser;
+    public  $isCurrantUser;
 
-    public function __construct()
+    public function mount()
     {
         $this->cartRepository       = new CartRepository();
-        $this->cartService          = new CartService();
         $this->favoriteRepository   = new FavoriteRepository();
-        $this->cart                 = $this->cartService->getUserCart(Auth::user());
+        $this->cartService          = new CartService();
+        $this->currantUser          = Auth::user();
+        $this->cart                 = $this->cartService->getUserCart($this->currantUser);
         $this->items                = $this->cartRepository->getCartItems($this->cart);
-        $this->favorites            = $this->favoriteRepository->getUserFavoriteProduct(Auth::user());
+        $this->isCurrantUser        = $this->currantUser->name === $this->data['user']->name;
+        $this->favorites            = $this->favoriteRepository->getUserFavoriteProduct($this->currantUser);
     }
     public function render()
     {
