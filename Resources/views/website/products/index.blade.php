@@ -13,6 +13,7 @@
         @endif
 
         <div class="loadMore">
+            
             <livewire:productmodule::product-list :data="$data"/>
         </div>
     </div>

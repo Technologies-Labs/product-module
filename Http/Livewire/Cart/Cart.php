@@ -11,6 +11,7 @@ class Cart extends Component
     public  $items;
     public  $cssClass;
 
+
     public function render()
     {
         return view('productmodule::livewire.cart.cart');
