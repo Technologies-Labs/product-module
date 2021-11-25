@@ -11,9 +11,15 @@ class Cart extends Component
     public  $items;
     public  $cssClass;
 
+    // public function mount()
+    // {
+    //     $product = $this->items->where('product_id',$this->product->id)->first();
+    //     $this->cssClass = $product ? '#088dcd' : '';
+    // }
 
     public function render()
     {
+        
         return view('productmodule::livewire.cart.cart');
     }
 
@@ -27,7 +33,7 @@ class Cart extends Component
                'product_id' => $this->product->id,
            ]);
            $this->items     = $this->items->push($product);
-           $this->cssClass  = 'filled';
+           $this->cssClass  = '#088dcd';
            $this->emit('cartItemAdded','added');
            return ;
        }

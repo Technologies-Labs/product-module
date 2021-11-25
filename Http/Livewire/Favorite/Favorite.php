@@ -11,6 +11,12 @@ class Favorite extends Component
     public $favoriteCssClass;
     public $favorites;
 
+    // public function mount()
+    // {
+    //     $product = $this->favorites->where('id',$this->product->id)->first();
+    //     $this->favoriteCssClass = $product ? '#088dcd' : '';
+    // }
+
     public function render()
     {
         return view('productmodule::livewire.favorite.favorite');
@@ -23,7 +29,7 @@ class Favorite extends Component
         {
             Auth::user()->favorites()->attach($this->product->id);
             $this->favorites         = $this->favorites->push($this->product);
-            $this->favoriteCssClass  = 'filled';;
+            $this->favoriteCssClass  = '#088dcd';
             return ;
         }
         Auth::user()->favorites()->detach($this->product->id);

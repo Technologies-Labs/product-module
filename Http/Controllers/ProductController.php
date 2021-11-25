@@ -201,6 +201,7 @@ class ProductController extends Controller
         $isCurrantUser  = $currantUser->name === $user->name;
 
         $data           = $this->productRepository->getUserProducts($user);
+        
         $categories     = Category::all();
         $statuses       = ProductStatus::all();
 
