@@ -6,13 +6,6 @@ use Modules\ProductModule\Entities\Product;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    public function getProducts()
-    {
-        return [
-            'products' => Product::all()
-        ];
-    }
-
     public function getUserProducts(User $user)
     {
         return [
