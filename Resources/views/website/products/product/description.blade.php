@@ -6,15 +6,23 @@
     <p class="details">{{$product->description}}</p>
 </div>
 <p class="product-single__price" style="margin-bottom: 9px;">
-    @empty(!$product->old_price)
-    <s class="old-price">
-        <span>YEM {{$product->old_price}}</span>
-    </s>
-    @endempty
+    @if(!$product->old_price)
+        <span class="price">YEM {{$product->price}}</span>
+    @else
+        <span class="new-price">YEM {{$product->price}}</span>
+        <s class="old-price">
+            <span>YEM {{$product->old_price}}</span>
+        </s>
+    @endif
+{{--    @empty(!$product->old_price)--}}
+{{--    <s class="old-price">--}}
+{{--        <span>YEM {{$product->old_price}}</span>--}}
+{{--    </s>--}}
+{{--    @endempty--}}
 
-    <span class="new-price">
-        <span>YEM {{$product->price}}</span>
-    </span>
+{{--    <span class="new-price">--}}
+{{--        <span>YEM {{$product->price}}</span>--}}
+{{--    </span>--}}
     @if ($product->is_offer && $product->offer_ratio != null)
     <span class="discount">
         <span>|</span>&nbsp;
