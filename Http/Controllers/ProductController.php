@@ -11,6 +11,9 @@ use Modules\ProductModule\Http\Requests\ProductRequest;
 use Modules\ProductModule\Repositories\ProductRepository;
 use Modules\ProductModule\Services\ProductService;
 use App\Traits\UploadTrait;
+use Modules\CartModule\Repositories\CartRepository;
+use Modules\CartModule\Repositories\FavoriteRepository;
+use Modules\CartModule\Services\CartService;
 use Modules\ProductModule\Entities\Product;
 use Modules\ProductModule\Entities\ProductImage;
 use Modules\ProductModule\Entities\ProductStatus;
@@ -18,6 +21,7 @@ use Modules\ProductModule\Enum\ProductEnum;
 use Modules\ProductModule\Enum\ProductImageEnum;
 use Modules\ProductModule\Services\ProductImageService;
 use Modules\CategoryModule\Entities\Category;
+use Modules\ProductModule\Enum\ProductPositionsEnum;
 
 class ProductController extends Controller
 {
@@ -26,6 +30,10 @@ class ProductController extends Controller
     private $productStatuses;
     private $categories;
     private $productRepository;
+    private $cartService;
+    private $cartRepository;
+    private $favoriteRepository;
+
 
     public function __construct(){
 
@@ -38,6 +46,9 @@ class ProductController extends Controller
         $this->productStatuses          = ProductStatus::all();
         $this->categories               = Category::all();
         $this->productRepository        = New ProductRepository();
+        $this->cartService              = New CartService();
+        $this->cartRepository           = New CartRepository();
+        $this->favoriteRepository       = New FavoriteRepository();
     }
 
     public function index()
@@ -190,23 +201,35 @@ class ProductController extends Controller
 
     }
 
-    public function getUserProducts($name)
+    public function getProductDetails(Product $product)
     {
-        $user           = User::where('name' , $name)->first();
-        if (!$user){
-            abort(404);
-        }
+        $user               = Auth::user();
+        $product            = $this->productRepository->getProductDetails($product);
+        $cart               = $this->cartService->getUserCart($user);
+        $items              = $this->cartRepository->getCartItems($cart);
+        $favorites          = $this->favoriteRepository->getUserFavoriteProduct($user);
 
-        $currantUser    = Auth::user();
-        $isCurrantUser  = $currantUser->name === $user->name;
+        return view('productmodule::website.product.index',compact('product','cart','items','favorites'));
 
-        $data           = $this->productRepository->getUserProducts($user);
-        
-        $categories     = Category::all();
-        $statuses       = ProductStatus::all();
-
-        return view('productmodule::website.products.index', compact('data','user','categories', 'statuses','isCurrantUser'));
     }
+
+    // public function getUserProducts($name)
+    // {
+    //     $user           = User::where('name' , $name)->first();
+    //     if (!$user){
+    //         abort(404);
+    //     }
+
+    //     $currantUser    = Auth::user();
+    //     $isCurrantUser  = $currantUser->name === $user->name;
+
+    //     $data           = $this->productRepository->getUserProducts($user);
+
+    //     $categories     = Category::all();
+    //     $statuses       = ProductStatus::all();
+
+    //     return view('productmodule::website.products.index', compact('data','user','categories', 'statuses','isCurrantUser'));
+    // }
 
 
 }

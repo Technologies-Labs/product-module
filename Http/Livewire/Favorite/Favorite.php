@@ -10,12 +10,13 @@ class Favorite extends Component
     public $product;
     public $favoriteCssClass;
     public $favorites;
+    public $template = "timeline";
 
-    // public function mount()
-    // {
-    //     $product = $this->favorites->where('id',$this->product->id)->first();
-    //     $this->favoriteCssClass = $product ? '#088dcd' : '';
-    // }
+    public function mount()
+    {
+        $product = $this->favorites->where('id',$this->product->id)->first();
+        $this->favoriteCssClass = $product ? '#088dcd' : '';
+    }
 
     public function render()
     {

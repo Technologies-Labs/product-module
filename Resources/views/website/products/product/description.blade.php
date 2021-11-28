@@ -1,7 +1,7 @@
 <figure id="main">
     <img src="{{asset('storage')}}/{{$product->image}}" alt="">
 </figure>
-<a href="{{route('products.show',$product->id)}}" class="post-title" target="_blank">{{$product->name}}</a>
+<a href="{{route('show.product',$product)}}" class="post-title" target="_blank">{{$product->name}}</a>
 <div>
     <p class="details">{{$product->description}}</p>
 </div>

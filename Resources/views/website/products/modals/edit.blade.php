@@ -1,4 +1,4 @@
-<!-- Edit product Modal -->
+{{-- <!-- Edit product Modal -->
 <div class="modal fade" id="edit_product_{{$product->id}}" aria-hidden="true" role="dialog" data-backdrop="false" >
     <div class="modal-dialog modal-dialog-centered post-modal" role="document">
         <div class="modal-content">
@@ -106,4 +106,4 @@
         </div>
     </div>
 </div>
-<!-- /Edit Details Modal -->
+<!-- /Edit Details Modal --> --}}

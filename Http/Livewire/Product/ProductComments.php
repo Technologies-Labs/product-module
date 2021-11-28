@@ -5,12 +5,14 @@ namespace Modules\ProductModule\Http\Livewire\Product;
 use Auth;
 use Livewire\Component;
 use Modules\CommentModule\Entities\Comment;
+use Modules\ProductModule\Entities\Product;
 
 class ProductComments extends Component
 {
     public $product;
     public $comments;
     public $content;
+    public $template = 'timeline';
 
     protected $rules = [
         'content' => 'required',

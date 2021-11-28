@@ -17,7 +17,7 @@
     @include('productmodule::website.products.product.actions')
     @endif
 
-    <ins><a title="" href="time-line.html">{{$user->name}}</a></ins>
+    <ins><a title="" href="{{ route('user.profile', ['name' => $user->name]) }}">{{$user->name}}</a></ins>
     <span><i class="icofont-globe"></i> published: {{$product->created_at->diffForHumans()}}</span>
 </div>
 

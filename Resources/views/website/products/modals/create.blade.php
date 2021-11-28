@@ -1,4 +1,4 @@
-<!-- create product Modal -->
+{{-- <!-- create product Modal -->
 <div class="modal fade" id="create_product" aria-hidden="true" role="dialog" data-backdrop="false" >
     <div class="modal-dialog modal-dialog-centered post-modal" role="document">
         <div class="modal-content">
@@ -97,4 +97,4 @@
     </div>
 </div>
 
-<!-- /create product Modal -->
+<!-- /create product Modal --> --}}
