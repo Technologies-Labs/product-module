@@ -16,7 +16,6 @@ class ListView extends Component
     private $productRepository;
 
     public  $isCurrantUser;
-    public  $user;
 
     public  $data;
     private $cartService;
@@ -35,7 +34,7 @@ class ListView extends Component
 
     public function mount()
     {
-        $this->data                 = $this->productRepository->getUserProducts($this->user);
+        $this->data                 = $this->productRepository->getProducts();
         $this->currantUser          = Auth::user();
         $this->cart                 = $this->cartService->getUserCart($this->currantUser);
         $this->items                = $this->cartRepository->getCartItems($this->cart);

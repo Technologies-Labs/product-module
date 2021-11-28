@@ -8,18 +8,16 @@ use Modules\ProductModule\Repositories\ProductRepository;
 class GridView extends Component
 {
     private $productRepository;
-
-    public  $user;
     public  $data;
 
     public function __construct()
     {
-        $this->productRepository    = new ProductRepository();
+        $this->productRepository = new ProductRepository();
     }
 
     public function mount()
     {
-        $this->data                 = $this->productRepository->getUserProducts($this->user);
+        $this->data = $this->productRepository->getProducts();
     }
 
     public function render()

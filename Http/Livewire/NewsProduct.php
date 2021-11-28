@@ -6,7 +6,6 @@ use Livewire\Component;
 
 class NewsProduct extends Component
 {
-    public  $user;
 
     public function render()
     {

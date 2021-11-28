@@ -1,5 +1,5 @@
 <figure>
-    @if ($user->is_verified)
+    @if ($product->user->is_verified)
     <em>
         <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
             viewBox="0 0 24 24">
@@ -10,14 +10,14 @@
     </em>
     @endif
 
-    <img alt="" src="{{ asset('storage') }}/{{$user->image}}">
+    <img alt="" src="{{ asset('storage') }}/{{$product->user->image}}">
 </figure>
 <div class="friend-name">
     @if($isCurrantUser or $user->id == $product->user_id)
     @include('productmodule::website.products.product.actions')
     @endif
 
-    <ins><a title="" href="time-line.html">{{$user->name}}</a></ins>
+    <ins><a title="" href="time-line.html">{{$product->user->name}}</a></ins>
     <span><i class="icofont-globe"></i> published: {{$product->created_at->diffForHumans()}}</span>
 </div>
 

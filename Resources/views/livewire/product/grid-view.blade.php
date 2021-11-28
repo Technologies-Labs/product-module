@@ -5,7 +5,7 @@
             <div class="col-lg-4 col-md-4 col-sm-6" id="single-product">
                 <div class="friend-info">
                     <figure>
-                        @if ($user->is_verified)
+                        @if ($product->user->is_verified)
                             <em>
                                 <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                                      viewBox="0 0 24 24">
@@ -15,10 +15,10 @@
                                 </svg>
                             </em>
                         @endif
-                        <img alt="" src="{{ asset('storage') }}/{{$user->image}}">
+                        <img alt="" src="{{ asset('storage') }}/{{$product->user->image}}">
                     </figure>
                     <div class="friend-name">
-                        <ins><a title="" href="time-line.html">{{$user->name}}</a></ins>
+                        <ins><a title="" href="time-line.html">{{$product->user->name}}</a></ins>
                     </div>
                 </div>
                 <div class="uk-card uk-card-default uk-card-body friendz">
