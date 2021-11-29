@@ -1,3 +1,4 @@
+@if (!$isCurrantUser)
 <livewire:productmodule::favorite.favorite
 :product="$product"
 :wire:key="$product->id"
@@ -10,6 +11,8 @@
 :cart="$cart"
 :items="$items"
 :cssClass="$cssClass" />
+@endif
+
 
 <a  title="" href="#" class="comment-to"><i class="icofont-comment"></i> Comment</a>
 
