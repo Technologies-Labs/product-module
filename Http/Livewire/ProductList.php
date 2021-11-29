@@ -12,6 +12,7 @@ use Modules\ProductModule\Repositories\ProductRepository;
 
 class ProductList extends Component
 {
+    private $cartService;
     private $cartRepository;
     private $favoriteRepository;
     private $productRepository;
@@ -20,7 +21,7 @@ class ProductList extends Component
     public  $isCurrantUser;
 
     public  $data;
-    private $cartService;
+
     public  $cart;
     public  $items;
     public  $favorites;

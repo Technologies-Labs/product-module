@@ -1,49 +1,56 @@
 <?php
 
-namespace Modules\ProductModule\Http\Livewire\Product;
+namespace Modules\ProductModule\Http\Livewire;
 
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Livewire\Component;
 use Modules\CartModule\Repositories\CartRepository;
 use Modules\CartModule\Repositories\FavoriteRepository;
 use Modules\CartModule\Services\CartService;
 use Modules\ProductModule\Repositories\ProductRepository;
 
-class ListView extends Component
+class Newsfeed extends Component
 {
+    private $cartService;
     private $cartRepository;
     private $favoriteRepository;
     private $productRepository;
 
-    public  $isCurrantUser;
-    public  $user;
-
     public  $data;
-    private $cartService;
+
     public  $cart;
     public  $items;
     public  $favorites;
     public  $currantUser;
+
+    public function boot()
+    {
+        $this->currantUser          = Auth::user();
+    }
 
     public function __construct()
     {
         $this->cartRepository       = new CartRepository();
         $this->favoriteRepository   = new FavoriteRepository();
         $this->cartService          = new CartService();
+
         $this->productRepository    = new ProductRepository();
     }
 
     public function mount()
     {
-        $this->data                 = $this->productRepository->getUserProducts($this->user);
-        $this->currantUser          = Auth::user();
-        $this->cart                 = $this->cartService->getUserCart($this->currantUser);
-        $this->items                = $this->cartRepository->getCartItems($this->cart);
-        $this->favorites            = $this->favoriteRepository->getUserFavoriteProduct($this->currantUser);
+        
+        $this->cart                 = ($this->currantUser) ? $this->cartService->getUserCart($this->currantUser) : null ;
+        $this->items                = ($this->currantUser) ? $this->cartRepository->getCartItems($this->cart) : null;
+        $this->favorites            = ($this->currantUser) ? $this->favoriteRepository->getUserFavoriteProduct($this->currantUser) : null;
     }
 
     public function render()
     {
-        return view('productmodule::livewire.product.list-view');
+        $products = $this->productRepository->getProducts(5)['products'];
+
+        return view('productmodule::livewire.newsfeed',[
+            'products'      => $products,
+        ]);
     }
 }

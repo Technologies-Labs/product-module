@@ -13,7 +13,7 @@
     <img alt="" src="{{ asset('storage') }}/{{$user->image}}">
 </figure>
 <div class="friend-name">
-    @if($isCurrantUser or $user->id == $product->user_id)
+    @if($isCurrantUser)
     @include('productmodule::website.products.product.actions')
     @endif
 

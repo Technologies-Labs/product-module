@@ -1,16 +1,16 @@
-@if (!$isCurrantUser)
-<livewire:productmodule::favorite.favorite
-:product="$product"
-:wire:key="$product->id"
-:favorites="$favorites"
-:favoriteCssClass="$favoriteCssClass" />
+@if (!$isCurrantUser && Auth::check())
+    <livewire:productmodule::favorite.favorite
+    :product="$product"
+    :wire:key="$product->id"
+    :favorites="$favorites"
+    :favoriteCssClass="$favoriteCssClass" />
 
-<livewire:productmodule::cart.cart
-:product="$product"
-:wire:key="$product->id"
-:cart="$cart"
-:items="$items"
-:cssClass="$cssClass" />
+    <livewire:productmodule::cart.cart
+    :product="$product"
+    :wire:key="$product->id"
+    :cart="$cart"
+    :items="$items"
+    :cssClass="$cssClass" />
 @endif
 
 
