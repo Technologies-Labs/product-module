@@ -14,7 +14,7 @@
                         <livewire:productmodule::product.product-comments :product="$product"/>
 
                     </div>
-                    <a href="product-detail.html" title="" class="reply" style="margin-top: 20px;">Read more <i
+                    <a href="{{ route('show.product', ['product' => $product]) }}" title="" class="reply" style="margin-top: 20px;">Read more <i
                             class="icofont-arrow-right"></i></a>
                 </div>
 

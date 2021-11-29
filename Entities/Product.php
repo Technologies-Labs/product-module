@@ -18,19 +18,7 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [
-        'name',
-        'description',
-        'image',
-        'price',
-        'old_price',
-        'count',
-        'user_id',
-        'category_id',
-        'product_status_id',
-        'is_offer',
-        'offer_ratio',
-    ];
+    protected $guarded = [];
 
 
     //////  Relationships /////

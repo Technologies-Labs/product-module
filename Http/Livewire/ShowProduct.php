@@ -23,11 +23,11 @@ class ShowProduct extends Component
 
     public function render()
     {
-        $item                       = $this->items->where('product_id',$this->product->id)->first();
-        $this->cssClass             = $item ? '#088dcd' : '';
+        // $item                       = $this->items->where('product_id',$this->product->id)->first();
+        // $this->cssClass             = $item ? '#088dcd' : '';
 
-        $favoriteProduct            = $this->favorites->where('id',$this->product->id)->first();
-        $this->favoriteCssClass     = $favoriteProduct ? '#088dcd' : '';
+        // $favoriteProduct            = $this->favorites->where('id',$this->product->id)->first();
+        // $this->favoriteCssClass     = $favoriteProduct ? '#088dcd' : '';
 
         return view('productmodule::livewire.show-product');
     }

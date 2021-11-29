@@ -10,16 +10,17 @@ class Cart extends Component
     public  $cart;
     public  $items;
     public  $cssClass;
+    public  $template = "timeline";
 
-    // public function mount()
-    // {
-    //     $product = $this->items->where('product_id',$this->product->id)->first();
-    //     $this->cssClass = $product ? '#088dcd' : '';
-    // }
+    public function mount()
+    {
+        $product = $this->items->where('product_id',$this->product->id)->first();
+        $this->cssClass = $product ? '#088dcd' : '';
+    }
 
     public function render()
     {
-        
+
         return view('productmodule::livewire.cart.cart');
     }
 

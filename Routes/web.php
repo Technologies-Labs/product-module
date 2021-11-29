@@ -33,13 +33,17 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
  */
 Route::middleware(['auth'])->group(function () {
 
-    Route::prefix('products')->group(function(){
-
-        Route::middleware(['auth'])->group(function () {
-            // Route::get('/user/{name}',[ProductController::class , 'getUserProducts'])->name('user.products');
-            Route::get('/delete/{id}',[ProductController::class , 'destroy'])->name('product.delete');
-            Route::get('/image/delete/{id}',[ProductController::class , 'deleteProductImage'])->name('product.image.delete');
-        });
-
+    Route::prefix('product')->group(function(){
+        Route::get('/{product}', [ProductController::class,'getProductDetails'])->name('show.product');
     });
+    // Route::prefix('products')->group(function(){
+
+    //
+    //     // Route::middleware(['auth'])->group(function () {
+    //     //     // Route::get('/user/{name}',[ProductController::class , 'getUserProducts'])->name('user.products');
+    //     //     // Route::get('/delete/{id}',[ProductController::class , 'destroy'])->name('product.delete');
+    //     //     // Route::get('/image/delete/{id}',[ProductController::class , 'deleteProductImage'])->name('product.image.delete');
+    //     // });
+
+    // });
 });
