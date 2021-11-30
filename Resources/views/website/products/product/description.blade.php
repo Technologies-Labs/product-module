@@ -10,6 +10,7 @@
         <span class="price">YEM {{$product->price}}</span>
     @else
         <span class="new-price">YEM {{$product->price}}</span>
+        <span>|</span>
         <s class="old-price">
             <span>YEM {{$product->old_price}}</span>
         </s>
