@@ -35,30 +35,31 @@ class ProductController extends Controller
     private $favoriteRepository;
 
 
-    public function __construct(){
+    public function __construct()
+    {
 
-    //    $this->middleware('permission:product-list'   ,['only' => ['index']]);
-    //    $this->middleware('permission:product-show'   ,['only' => ['show']]);
-    //    $this->middleware('permission:product-create' ,['only' => ['store']]);
-    //    $this->middleware('permission:product-edit'   ,['only' => ['edit','update']]);
-    //    $this->middleware('permission:product-delete' ,['only' => ['destroy']]);
+        //    $this->middleware('permission:product-list'   ,['only' => ['index']]);
+        //    $this->middleware('permission:product-show'   ,['only' => ['show']]);
+        //    $this->middleware('permission:product-create' ,['only' => ['store']]);
+        //    $this->middleware('permission:product-edit'   ,['only' => ['edit','update']]);
+        //    $this->middleware('permission:product-delete' ,['only' => ['destroy']]);
 
         $this->productStatuses          = ProductStatus::all();
         $this->categories               = Category::all();
-        $this->productRepository        = New ProductRepository();
-        $this->cartService              = New CartService();
-        $this->cartRepository           = New CartRepository();
-        $this->favoriteRepository       = New FavoriteRepository();
+        $this->productRepository        = new ProductRepository();
+        $this->cartService              = new CartService();
+        $this->cartRepository           = new CartRepository();
+        $this->favoriteRepository       = new FavoriteRepository();
     }
 
     public function index()
     {
-        if(request()->ajax()){
-            $products = Product::get();
-            return datatables($products)->make(true);
-        }
+        // if(request()->ajax()){
+        //     $products = Product::get();
+        //     return datatables($products)->make(true);
+        // }
 
-        return view('productmodule::dashboard.products.index');
+        // return view('productmodule::dashboard.products.index');
     }
     // public function getProducts()
     // {
@@ -73,133 +74,111 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('productmodule::website.products.create',
-        [
-            'productStatuses'=>$this->productStatuses,
-            'categories'     =>$this->categories,
-        ]);
+        return view(
+            'productmodule::website.pages.create_update_product',
+            [
+                'edit'          => false,
+                'statuses'      => $this->productStatuses,
+                'categories'    => $this->categories,
+            ]
+        );
     }
 
     public function store(ProductRequest $request)
     {
-        $productService =new ProductService();
-        $productService ->setName           ($request->name)
-                        ->setPrice          ($request->price)
-                        ->setOldPrice       ($request->old_price)
-                        ->setCount          ($request->count)
-                        ->setUserID         (Auth::user()->id)
-                        ->setCategoryID     ($request->category_id)
-                        ->setProductStatusID($request->product_status_id)
-                        ->setDescription    ($request->description)
-                        ->setIsOffer        ($request->is_offer)
-                        ->setOfferRatio     ($request->offer_ratio)
-                        ->setImage          ($request->image);
+        $productService = new ProductService();
+        $product = $productService
+            ->setName($request->name)
+            ->setPrice($request->price)
+            ->setOldPrice($request->old_price)
+            ->setCount($request->count)
+            ->setUserID(Auth::user()->id)
+            ->setCategoryID($request->category_id)
+            ->setProductStatusID($request->product_status_id)
+            ->setDescription($request->description)
+            ->setDetails($request->details)
+            ->setIsOffer($request->offer_ratio ? 1 : 0)
+            ->setOfferRatio($request->offer_ratio)
+            ->setImage($request->image)
+            ->createProduct();
 
-        $newProduct= $productService->createProduct();
 
         if ($request->hasfile('product_images')) {
             foreach ($request->file('product_images') as $file) {
-                $image        =$this->storeImage($file,ProductImageEnum::PRODUCT_IMAGES_PATH);
                 $productImage = new ProductImageService();
-                $productImage->setProductID($newProduct->id);
-                $productImage->setImage($image);
+                $productImage->setProductID($product->id);
+                $productImage->setImage($file);
                 $productImage->createProductImage();
             }
         }
-        if($newProduct)
-        return response()->json([
-            'status'=>true,
-            'msg'=>'تم انشاء منتج بنجاح',
-        ]);
+        return redirect()->back()->with('success', 'Product Created');
     }
 
-    public function show($id)
+    // public function show($id)
+    // {
+    //  $product= Product::find($id);
+
+    //  if(!$product){
+    //     return 'product not found';
+    //  }
+
+    // return view('productmodule::website.products.show',compact('product'));
+    // }
+
+    public function edit(Product $product)
     {
-     $product= Product::find($id);
-
-     if(!$product){
-        return 'product not found';
-     }
-
-    return view('productmodule::website.products.show',compact('product'));
-    }
-
-    public function edit($id)
-    {
-        $product= Product::find($id);
-        if(!$product){
-            return 'product not found';
-        }
-        $productStatuses = ProductStatus::get();
-        return view('productmodule::website.products.edit',
-        [
-            'product'         =>$product,
-            'productStatuses' =>$this->productStatuses,
-            'categories'      =>$this->categories,
-        ]);
-    }
-
-    public function update(ProductRequest $request, $id)
-    {
-        $product = Product::find($id);
-        if(!$product){
-            return "product not found";
+        if (!$product) {
+            abort(404);
+            return;
         }
 
-        $productService =new ProductService();
-        $productService ->setName           ($request->name)
-                        ->setPrice          ($request->price)
-                        ->setOldPrice       ($request->old_price)
-                        ->setCount          ($request->count)
-                        ->setCategoryID     ($request->category_id)
-                        ->setProductStatusID($request->product_status_id)
-                        ->setDescription    ($request->description)
-                        ->setIsOffer        ($request->is_offer)
-                        ->setOfferRatio     ($request->offer_ratio);
-                        if($request->has('image')){
-                        $productService->updateImg($request->image ,$product->image);
-                        }
-        $updatedProduct = $productService->updateProduct($product);
+        return view(
+            'productmodule::website.pages.create_update_product',
+            [
+                'edit'              => true,
+                'product'           => $product,
+                'statuses'          => $this->productStatuses,
+                'categories'        => $this->categories,
+            ]
+        );
+    }
+
+    public function update(ProductRequest $request, Product $product)
+    {
+        if (!$product) {
+            abort(404);
+            return;
+        }
+        $productService = new ProductService();
+
+        $productService
+            ->setName($request->name)
+            ->setPrice($request->price)
+            ->setOldPrice($request->old_price)
+            ->setCount($request->count)
+            ->setCategoryID($request->category_id)
+            ->setProductStatusID($request->product_status_id)
+            ->setDescription($request->description)
+            ->setDetails($request->details)
+            ->setIsOffer($request->offer_ratio ? 1 : 0)
+            ->setOfferRatio($request->offer_ratio);
+        if ($request->has('image')) {
+            $productService->setImage($request->image);
+        }
+        $product = $productService->updateProduct($product);
 
         if ($request->hasfile('product_images')) {
             foreach ($request->file('product_images') as $file) {
-
-                $image        =$this->storeImage($file,ProductImageEnum::PRODUCT_IMAGES_PATH);
-                $productImage =new ProductImageService();
+                $productImage = new ProductImageService();
                 $productImage->setProductID($product->id);
-                $productImage->setImage($image);
+                $productImage->setImage($file);
                 $productImage->createProductImage();
             }
         }
-
-         return redirect()->back();
+        return redirect()->back()->with('success', 'Product Updated');
     }
 
-    public function destroy($id)
-    {
-        $product = Product::find($id);
-        if(!$product)
-        {
-            return 'product not found';
-        }
 
-        return $product->delete();
-    }
-
-    public function deleteProductImage($id)
-    {
-        $image = ProductImage::find($id);
-        if(!$image)
-        {
-            return 'product image not found';
-        }
-
-        $this->deleteImage($image->image);
-        $image->delete();
-
-        return redirect()->back();
-
-    }
 
     public function getProductDetails(Product $product)
     {
@@ -209,8 +188,7 @@ class ProductController extends Controller
         $items              = $this->cartRepository->getCartItems($cart);
         $favorites          = $this->favoriteRepository->getUserFavoriteProduct($user);
 
-        return view('productmodule::website.product.index',compact('product','cart','items','favorites'));
-
+        return view('productmodule::website.product.index', compact('product', 'cart', 'items', 'favorites'));
     }
 
     // public function getUserProducts($name)

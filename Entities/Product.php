@@ -12,13 +12,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\CartModule\Entities\Cart;
+use Modules\ProductModule\Scopes\ProductScope;
 
 class Product extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory , SoftDeletes;
 
     protected $guarded = [];
+    protected static function booted()
+    {
+        static::addGlobalScope(new ProductScope);
+    }
+
 
 
     //////  Relationships /////

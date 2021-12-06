@@ -27,13 +27,6 @@ class ProductList extends Component
     public  $favorites;
     public  $currantUser;
 
-    protected $listeners = ['productDeleted'];
-
-
-    public function productDeleted()
-    {
-        dd('s');
-    }
 
     public function __construct()
     {

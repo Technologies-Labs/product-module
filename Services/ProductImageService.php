@@ -1,6 +1,7 @@
 <?php
 namespace Modules\ProductModule\Services;
 
+use App\Traits\ImageHelperTrait;
 use App\Traits\UploadTrait;
 use Modules\ProductModule\Entities\ProductImage;
 use Modules\ProductModule\Enum\ProductEnum;
@@ -9,7 +10,7 @@ use function PHPUnit\Framework\isNull;
 
 class ProductImageService{
 
-    use UploadTrait;
+    use UploadTrait , ImageHelperTrait;
     public $image;
     public $product_id;
 
@@ -19,9 +20,8 @@ class ProductImageService{
 
         return ProductImage::create(
             [
-                'image'      =>$this->image,
-                'product_id' =>$this->product_id,
-
+                'image'      => $this->image,
+                'product_id' => $this->product_id,
             ]
         );
     }
@@ -34,7 +34,7 @@ class ProductImageService{
     public function setImage($image): void
     {
 
-         $this->image =$image;
+         $this->image = $this->uploadImageWithIntervention($image, 366, 451 ,ProductEnum::IMAGE)['name'];
 
     }
 

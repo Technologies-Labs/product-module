@@ -10,9 +10,11 @@
             </svg></i>
         <ul>
             <li>
-                <i class="icofont-pen-alt-1"></i>Edit Post
-                <span>Edit This Post within a Hour</span>
+                <a target="_blank" href="{{ route('edit.product.page', ['product' => $product]) }}">
+                    <i class="icofont-pen-alt-1"></i>Edit Post <span>Edit This Post within a Hour</span>
+                </a>
             </li>
+
             <li wire:click='delete'>
                 <i class="icofont-ui-delete"></i>Delete Post
                 <span>If inappropriate Post By

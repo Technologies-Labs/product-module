@@ -1,4 +1,7 @@
 <div class="main-wraper" id="grid-view">
+    @php
+    use Modules\ProductModule\Enum\ProductEnum;
+    @endphp
     <h4 class="main-title">Related Products
         {{-- <a class="view-all" href="#" title="">view all</a> --}}
     </h4>
@@ -7,11 +10,11 @@
 
         <div class="book-post" id="single-product">
             @livewire('usermodule::user.user-header-information', ['user' => $product->user , 'product' => $product], key($product->id))
-            
+
 
             <div class="uk-card uk-card-default uk-card-body friendz">
                 <figure class="uk-inline uk-margin">
-                    <img src="{{ asset('storage') }}/{{$product->image}}" alt="">
+                    <img src="{{ asset('storage') }}/{{ProductEnum::IMAGE}}{{$product->image}}" alt="">
                     <em id="discount">{{$product->status->name}}</em>
 
                 </figure>

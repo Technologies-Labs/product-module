@@ -34,10 +34,13 @@ class ShowProduct extends Component
 
     public function delete()
     {
-        //dd($this->product );
-        //$this->product->delete();
+        if (!$this->product) {
+            $this->modalClose('','error','Error','Error');
+            return null;
+        }
 
-        //$this->emit('productDeleted');
+        $this->product->delete();
+        $this->emit('deleteItem', "#user-product-".$this->product->id);
         $this->modalClose('','success','Your Product Deleted Successfully','Product Delete');
     }
 }

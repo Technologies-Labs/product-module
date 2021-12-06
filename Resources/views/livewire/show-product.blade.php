@@ -1,4 +1,5 @@
-<div class="main-wraper" >
+<div class="main-wraper" id="user-product-{{$product->id}}">
+    
     <div class="user-post">
         <div class="friend-info">
             @include('productmodule::website.products.product.user')

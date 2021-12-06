@@ -1,9 +1,13 @@
+@php
+    use Modules\ProductModule\Enum\ProductEnum;
+@endphp
 <figure id="main">
-    <img src="{{asset('storage')}}/{{$product->image}}" alt="">
+    <img src="{{asset('storage')}}/{{ProductEnum::IMAGE}}{{$product->image}}" alt="">
 </figure>
 <a href="{{route('show.product',$product)}}" class="post-title" target="_blank">{{$product->name}}</a>
-<div>
-    <p class="details">{{$product->description}}</p>
+<div class="details">
+    {!!$product->description !!}
+    {{-- <p class="details"></p> --}}
 </div>
 <p class="product-single__price" style="margin-bottom: 9px;">
     @if(!$product->old_price)

@@ -1,8 +1,11 @@
 <div class="widget stick-widget">
+    @php
+    use Modules\ProductModule\Enum\ProductEnum;
+    @endphp
     <h4 class="widget-title">Popular Products</h4>
     @foreach ($products as $product)
     <div class="popular-book">
-        <figure><img src="{{ asset('storage') }}/{{$product->image}}" alt=""></figure>
+        <figure><img src="{{ asset('storage') }}/{{ProductEnum::IMAGE}}{{$product->image}}" alt=""></figure>
         <div class="book-about">
             <h6><a href="{{ route('show.product', ['product' => $product]) }}" title="">{{$product->name}}</a></h6>
             <span><a href="{{ route('user.profile', ['name' => $product->user->name]) }}">{{$product->user->full_name}}</a></span>

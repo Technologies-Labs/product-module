@@ -1,4 +1,7 @@
 <div class="main-wraper">
+    @php
+    use Modules\ProductModule\Enum\ProductEnum;
+    @endphp
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6" style="padding: 0 38px;">
             <div class="product-details-left">
@@ -8,7 +11,7 @@
                     <div class="lg-image">
                         <a class="popup-img venobox vbox-item" href="{{ asset('storage') }}/{{$image->image}}"
                             data-gall="myGallery">
-                            <img src="{{ asset('storage') }}/{{$image->image}}" alt="product image">
+                            <img src="{{ asset('storage') }}/{{ProductEnum::IMAGE}}{{$image->image}}" alt="product image">
                         </a>
                     </div>
                     @endforeach
@@ -18,7 +21,7 @@
 
                 <div class="product-details-thumbs slider-thumbs-1">
                     @foreach ($product['images'] as $image)
-                    <div class="sm-image"><img src="{{ asset('storage') }}/{{$image->image}}" alt="product image thumb">
+                    <div class="sm-image"><img src="{{ asset('storage') }}/{{ProductEnum::IMAGE}}{{$image->image}}" alt="product image thumb">
                     </div>
                     @endforeach
 
@@ -74,7 +77,7 @@
                     </p>
                 </span>
                 <p>
-                    {{$product['product']->description}}
+                    {!!$product['product']->description!!}
                 </p>
                 <ul class="item-info">
                     <li><span>Category : </span> <a>{{$product['category']->name}}</a></li>
@@ -117,7 +120,7 @@
 
     </div>
     <ul class="nav nav-tabs post-detail-btn" id="details">
-        <li class="nav-item"><a class="active" href="#desc" data-toggle="tab">Description</a></li>
+        <li class="nav-item"><a class="active" href="#desc" data-toggle="tab">Details</a></li>
         <li class="nav-item"><a class="" href="#comment" data-toggle="tab">Comments</a></li>
     </ul>
 

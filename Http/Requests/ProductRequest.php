@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProductRequest extends FormRequest
 {
+
       /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,7 +26,7 @@ class ProductRequest extends FormRequest
         return [
             'name'=>'required|string',
             'description'=>'string|nullable',
-            'image'=>'',
+            //'image'=>'required | image',
             'price'=>'required',
             'old_price'=>'required|string',
             'count'=>'required|int',

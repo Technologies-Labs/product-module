@@ -1,6 +1,7 @@
 <?php
 namespace Modules\ProductModule\Services;
 
+use App\Traits\ImageHelperTrait;
 use Modules\ProductModule\Entities\Product;
 use App\Traits\UploadTrait;
 use Modules\ProductModule\Entities\ProductImage;
@@ -10,11 +11,12 @@ use PhpParser\Node\Expr\Cast\Double;
 use function PHPUnit\Framework\isNull;
 
 class ProductService{
-    use UploadTrait;
+    use UploadTrait , ImageHelperTrait;
 
  //class attributes
     public $name;
     public $description;
+    public $details;
     public $image ;
     public $price;
     public $old_price;
@@ -25,13 +27,17 @@ class ProductService{
     public $is_offer;
     public $offer_ratio;
 
+
+
     public function createProduct()
     {
+
 
         return Product::create(
             [
                 'name'              =>$this->name,
                 'description'       =>$this->description,
+                'details'           =>$this->details,
                 'image'             =>$this->image,
                 'price'             =>$this->price,
                 'old_price'         =>$this->old_price,
@@ -51,6 +57,7 @@ class ProductService{
             [
                 'name'              =>$this->name,
                 'description'       =>$this->description,
+                'details'           =>$this->details,
                 'image'             =>($this->image??$product->image),
                 'price'             =>$this->price,
                 'old_price'         =>$this->old_price,
@@ -61,7 +68,7 @@ class ProductService{
                 'offer_ratio'       =>$this->offer_ratio,
             ]
         );
-        return Product::find($product->id);
+        return  $product;
 
     }
 
@@ -84,15 +91,23 @@ class ProductService{
         return $this;
     }
 
+    public function setDetails($details)
+    {
+        $this->details = $details;
+        return $this;
+    }
+
+
     /**
      * @param mixed $image
      */
     public function setImage($image)
     {
+        ;
         if(!($image) ){
-            $this->image=ProductEnum::PRODUCT_DEFAULT_IMAGE;
+            $this->image = ProductEnum::PRODUCT_DEFAULT_IMAGE;
         }else
-        $this->image =$this->storeImage($image,ProductEnum::PRODUCT_IMAGE_PATH);
+        $this->image = $this->uploadImageWithIntervention($image, 549, 329 ,ProductEnum::IMAGE)['name'];
         return $this;
     }
 
