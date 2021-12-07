@@ -2,15 +2,16 @@
 
 namespace Modules\ProductModule\Repositories;
 use App\Models\User;
+use Illuminate\Pagination\Cursor;
 use Modules\ProductModule\Entities\Product;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    public function getUserProducts(User $user)
+    public function getUserProducts(User $user , $perPage , $page)
     {
         return [
             'user'      => $user,
-            'products'  => $user->products()->with(['category', 'status', 'comments'])->paginate(10)
+            'products'  => $user->products()->with(['category', 'status', 'comments'])->paginate($perPage, ['*'], null, $page)
         ];
     }
 
