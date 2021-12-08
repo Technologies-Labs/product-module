@@ -1,5 +1,5 @@
 @extends('layouts.simple.master')
-
+@push('css_after')
 <style>
     .image-area {
         display: inline-block;
@@ -45,6 +45,9 @@
         right: -11px;
     }
 </style>
+@endpush
+
+
 @push('scripts_after')
 <script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('js/ckeditor/adapters/jquery.js')}}"></script>

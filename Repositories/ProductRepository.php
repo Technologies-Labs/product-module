@@ -18,7 +18,7 @@ class ProductRepository implements ProductRepositoryInterface
     public function getProducts($paginate = 10)
     {
         return [
-            'products'  => Product::with(['user','comments'])->orderBy('id','DESC')->paginate($paginate)
+            'products'  => Product::with(['user','comments'])->orderBy('id','DESC')->paginate($paginate, ['*'], null)
         ];
     }
 

@@ -27,43 +27,36 @@ class ProductList extends Component
     public  $favorites;
     public  $currantUser;
 
-    public  $perPage;
+    public  $perPage = 3;
     public  $page;
 
     public function loadMore()
     {
-        $this->perPage += 10 ;
+        $this->perPage += 1;
     }
 
-//    public function __construct()
-//    {
-//        $this->cartRepository       = new CartRepository();
-//        $this->favoriteRepository   = new FavoriteRepository();
-//        $this->cartService          = new CartService();
-//        $this->productRepository    = new ProductRepository();
-//    }
-
-    public function mount()
+    public function boot()
     {
-//        $this->productRepository    = new ProductRepository();
-//        $this->data                 = $this->productRepository->getUserProducts($this->user);
-
         $this->cartRepository       = new CartRepository();
         $this->favoriteRepository   = new FavoriteRepository();
         $this->cartService          = new CartService();
         $this->productRepository    = new ProductRepository();
+    }
 
+
+    public function booted()
+    {
         $this->currantUser          = Auth::user();
         $this->cart                 = $this->cartService->getUserCart($this->currantUser);
         $this->items                = $this->cartRepository->getCartItems($this->cart);
         //$this->isCurrantUser        = $this->currantUser->name === $this->data['user']->name;
         $this->favorites            = $this->favoriteRepository->getUserFavoriteProduct($this->currantUser);
     }
+
     public function render()
     {
-        $this->productRepository    = new ProductRepository();
         $this->data                  = $this->productRepository->getUserProducts($this->user , $this->perPage , $this->page);
-
+        
         return view('productmodule::livewire.product-list');
     }
 }
