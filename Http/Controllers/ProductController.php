@@ -21,7 +21,9 @@ use Modules\ProductModule\Enum\ProductEnum;
 use Modules\ProductModule\Enum\ProductImageEnum;
 use Modules\ProductModule\Services\ProductImageService;
 use Modules\CategoryModule\Entities\Category;
+use Modules\NotificationModule\Enums\NotificationTemplateKeysEnums;
 use Modules\ProductModule\Enum\ProductPositionsEnum;
+use Modules\ProductModule\Notifications\ProductNotification;
 
 class ProductController extends Controller
 {
@@ -111,6 +113,13 @@ class ProductController extends Controller
                 $productImage->createProductImage();
             }
         }
+        $productNotification = new ProductNotification();
+        $productNotification
+        ->setTemplate(NotificationTemplateKeysEnums::CREATE_PRODUCT)
+        ->setUser(Auth::user())
+        ->setProduct($product)
+        ->setCreateProductMessage()
+        ->handle();
         return redirect()->back()->with('success', 'Product Created');
     }
 
