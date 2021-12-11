@@ -13,24 +13,13 @@
     <img alt="" src="{{ asset('storage') }}/{{$user->image}}">
 </figure>
 <div class="friend-name">
-    @if($isCurrantUser)
+    
+    @if($isCurrantUser && (Auth::user()->can("product-edit") || Auth::user()->can("product-delete")))
     @include('productmodule::website.products.product.actions')
     @endif
+
 
     <ins><a title="" href="{{ route('user.profile', ['name' => $user->name]) }}">{{$user->name}}</a></ins>
     <span><i class="icofont-globe"></i> published: {{$product->created_at->diffForHumans()}}</span>
 </div>
 
-{{-- <div class="col-lg-10 col-sm-10 col-xs-10">
-    <figure>
-        <img src="{{asset($user->image)}}" alt="">
-    </figure>
-    <div class="friend-name ">
-        <ins>
-            @if ($user->is_verified)
-            <img src="{{ asset('assets/images/checkmark.svg') }}" />
-            @endif
-            <a href="" title="">{{$user->name}}</a></ins>
-        <span>published: {{$product->created_at}}</span>
-    </div>
-</div> --}}

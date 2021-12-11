@@ -20,7 +20,7 @@
     :items='$items'
     :isCurrantUser='$isCurrantUser'
     :favorites="$favorites"
-    :wire:key="$product->id" />
+    :wire:key="md5(rand())" />
     @endforeach
 
 

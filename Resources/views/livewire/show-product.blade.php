@@ -1,5 +1,5 @@
 <div class="main-wraper" id="user-product-{{$product->id}}">
-    
+
     <div class="user-post">
         <div class="friend-info">
             @include('productmodule::website.products.product.user')
@@ -24,27 +24,3 @@
     </div>
 </div>
 
-{{-- <div class="central-meta item" id="delete_products_{{$product->id}}">
-    <div class="user-post">
-        <div class="friend-info ">
-            <div class="post-head">
-                <div class="row">
-
-
-                </div>
-            </div>
-
-            <div class="post-meta" id="post">
-
-                @include('productmodule::website.products.product.images')
-
-                @include('productmodule::website.products.product.info')
-
-
-
-            </div>
-        </div>
-    </div>
-    @include('productmodule::website.products.modals.edit')
-    @include('productmodule::website.products.modals.comments')
-</div><!-- centerl meta --> --}}
