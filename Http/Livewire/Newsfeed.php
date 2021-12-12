@@ -57,7 +57,7 @@ class Newsfeed extends Component
     //     $this->productRepository    = new ProductRepository();
     // }
 
-    public function mount()
+    public function booted()
     {
         $this->cart                 = ($this->currantUser) ? $this->cartService->getUserCart($this->currantUser) : null ;
         $this->items                = ($this->currantUser) ? $this->cartRepository->getCartItems($this->cart) : null;

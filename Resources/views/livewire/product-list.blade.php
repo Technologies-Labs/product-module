@@ -48,4 +48,6 @@
     @if($data['products']->hasMorePages())
         @include('components.loading')
     @endif
+
+    @livewire('usermodule::user.suggested-users',['template' =>'slider'])
 </div>

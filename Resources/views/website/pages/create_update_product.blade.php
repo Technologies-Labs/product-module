@@ -69,21 +69,7 @@ use Modules\ProductModule\Enum\ProductEnum;
             <div class="row">
                 <div class="col-lg-4">
                     <aside class="sidebar">
-                        <div class="widget">
-                            <h4 class="widget-title">Recent Media</h4>
-                            <div class="recent-media">
-                                <figure>
-                                    <img src="{{ asset('images/resources/course-6.jpg') }}" alt="">
-                                    <a class="play-btn" data-fancybox="" href=""><i class="icofont-play"></i></a>
-                                    <span>Vu.Js Free Tutorial</span>
-                                </figure>
-                                <figure>
-                                    <img src="{{ asset('images/resources/course-1.jpg') }}" alt="">
-                                    <a class="play-btn" data-fancybox="" href=""><i class="icofont-play"></i></a>
-                                    <span>Css3 2020 Tutorial</span>
-                                </figure>
-                            </div>
-                        </div><!-- recent media -->
+                        @livewire('advertisementmodule::position-advertisements', ['position' => Modules\AdvertisementModule\Enum\AdvertisementPositionEnum::SIDEBAR])
 
                     </aside>
 
