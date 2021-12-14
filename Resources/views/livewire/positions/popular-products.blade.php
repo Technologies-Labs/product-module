@@ -2,7 +2,7 @@
     @php
     use Modules\ProductModule\Enum\ProductEnum;
     @endphp
-    <h4 class="widget-title">Popular Products</h4>
+    <h4 class="widget-title">المنتجات الشائعه</h4>
     @foreach ($products as $product)
     <div class="popular-book">
         <figure><img src="{{ asset('storage') }}/{{ProductEnum::IMAGE}}{{$product->image}}" alt=""></figure>

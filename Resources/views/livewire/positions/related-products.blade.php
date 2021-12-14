@@ -2,7 +2,7 @@
     @php
     use Modules\ProductModule\Enum\ProductEnum;
     @endphp
-    <h4 class="main-title">Related Products
+    <h4 class="main-title">منتجات ذات صله
         {{-- <a class="view-all" href="#" title="">view all</a> --}}
     </h4>
     <div class="books-caro row">

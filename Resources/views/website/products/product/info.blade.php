@@ -14,7 +14,7 @@
 @endif
 
 
-<a  title="" href="#" class="comment-to"><i class="icofont-comment"></i> Comment</a>
+<a  title="" href="#" class="comment-to">تعليق<i class="icofont-comment"></i></a>
 
 {{-- <a title="" href="#" class="share-to"><i class="icofont-share-alt"></i> Share</a> --}}
 {{-- <div class="we-video-info">

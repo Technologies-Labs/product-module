@@ -120,8 +120,8 @@
 
     </div>
     <ul class="nav nav-tabs post-detail-btn" id="details">
-        <li class="nav-item"><a class="active" href="#desc" data-toggle="tab">Details</a></li>
-        <li class="nav-item"><a class="" href="#comment" data-toggle="tab">Comments</a></li>
+        <li class="nav-item"><a class="active" href="#desc" data-toggle="tab">تفاصيل</a></li>
+        <li class="nav-item"><a class="" href="#comment" data-toggle="tab">تعليقات</a></li>
     </ul>
 
     <div class="tab-content" style="padding: 0 30px">

@@ -1,5 +1,5 @@
 <div class="main-wraper" id="user-product-{{$product->id}}">
-    
+
     <div class="user-post">
         <div class="friend-info">
             @include('productmodule::website.products.product.user')
@@ -15,8 +15,9 @@
                         <livewire:productmodule::product.product-comments :product="$product"/>
 
                     </div>
-                    <a href="{{ route('show.product', ['product' => $product]) }}" title="" class="reply" style="margin-top: 20px;">Read more <i
-                            class="icofont-arrow-right"></i></a>
+                    <a href="{{ route('show.product', ['product' => $product]) }}" title="" class="reply" style="margin-top: 20px;">
+                        تفاصيل<i class="icofont-arrow-left"></i>
+                    </a>
                 </div>
 
             </div>
