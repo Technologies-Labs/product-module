@@ -1,6 +1,7 @@
 <?php
 
 namespace Modules\ProductModule\Entities;
+
 use  Modules\ProductModule\Entities\ProductImage;
 use  Modules\ProductModule\Entities\ProductStatus;
 use  Modules\CommentModule\Entities\Comment;
@@ -16,7 +17,7 @@ use Modules\ProductModule\Scopes\ProductScope;
 
 class Product extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $guarded = [];
     protected static function booted()
@@ -39,7 +40,7 @@ class Product extends Model
 
     public function carts()
     {
-        return $this->belongsToMany(Cart::class,'cart_item');
+        return $this->belongsToMany(Cart::class, 'cart_item');
     }
     // public function carts()
     // {
@@ -48,7 +49,7 @@ class Product extends Model
 
     public function favorites()
     {
-        return $this->belongsToMany(User::class,'favorites');
+        return $this->belongsToMany(User::class, 'favorites');
     }
 
     public function comments()
@@ -63,13 +64,13 @@ class Product extends Model
 
     public function status()
     {
-        return $this->belongsTo(ProductStatus::class,'product_status_id');
+        return $this->belongsTo(ProductStatus::class, 'product_status_id');
     }
 
 
 
-    // protected static function newFactory()
-    // {
-    //     return \Modules\ProductModule\Database\factories\ProductFactory::new();
-    // }
+    protected static function newFactory()
+    {
+        return \Modules\ProductModule\Database\factories\ProductFactory::new();
+    }
 }
