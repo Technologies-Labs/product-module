@@ -7,6 +7,7 @@ use  Modules\ProductModule\Entities\ProductStatus;
 use  Modules\CommentModule\Entities\Comment;
 use  Modules\CategoryModule\Entities\Category;
 use  App\Models\User;
+use Database\Factories\ProductsFactory;
 use  Modules\UserModule\Entities\Company;
 use  Modules\UserModule\Entities\Customer;
 use Illuminate\Database\Eloquent\Model;
@@ -67,10 +68,8 @@ class Product extends Model
         return $this->belongsTo(ProductStatus::class, 'product_status_id');
     }
 
-
-
     protected static function newFactory()
     {
-        return \Modules\ProductModule\Database\factories\ProductFactory::new();
+        return ProductsFactory::new();
     }
 }

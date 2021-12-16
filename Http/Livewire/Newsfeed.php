@@ -23,11 +23,11 @@ class Newsfeed extends Component
     public  $favorites;
     public  $currantUser;
 
-    public  $perPage = 1;
+    public  $perPage = 10;
 
     public function loadMore()
     {
-        $this->perPage += 1;
+        $this->perPage += 10;
     }
 
     public function boot()

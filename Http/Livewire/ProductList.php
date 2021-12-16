@@ -27,12 +27,12 @@ class ProductList extends Component
     public  $favorites;
     public  $currantUser;
 
-    public  $perPage = 3;
+    public  $perPage = 10;
     public  $page;
 
     public function loadMore()
     {
-        $this->perPage += 1;
+        $this->perPage += 10;
     }
 
     public function boot()
@@ -56,7 +56,7 @@ class ProductList extends Component
     public function render()
     {
         $this->data                  = $this->productRepository->getUserProducts($this->user , $this->perPage , $this->page);
-        
+
         return view('productmodule::livewire.product-list');
     }
 }
