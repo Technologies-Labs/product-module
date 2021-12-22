@@ -200,6 +200,11 @@ class ProductController extends Controller
         return view('product::website.product.index', compact('product', 'cart', 'items', 'favorites'));
     }
 
+    public function search(Request $request)
+    {
+        dd($request);
+    }
+
     // public function getUserProducts($name)
     // {
     //     $user           = User::where('name' , $name)->first();

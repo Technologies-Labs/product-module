@@ -39,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store/page', [ProductController::class,'store'])->name('store.product');
         Route::get('/{product}/edit', [ProductController::class,'edit'])->name('edit.product.page');
         Route::post('/{product}/update', [ProductController::class,'update'])->name('update.product.page');
+
+        Route::post('/search', [ProductController::class,'search'])->name('search.product');
     });
 
     // Route::prefix('products')->group(function(){
