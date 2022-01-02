@@ -5,7 +5,7 @@
     <h4 class="main-title">Related Products
         {{-- <a class="view-all" href="#" title="">view all</a> --}}
     </h4>
-    <div class="books-caro row">
+    <div class="books-caro row mr-0">
         @foreach ($products as $product)
 
         <div class="book-post" id="single-product">

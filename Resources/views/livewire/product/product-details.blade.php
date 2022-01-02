@@ -4,7 +4,7 @@
     @endphp
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6" style="padding: 0 38px;">
-            <div class="product-details-left">
+            <div class="product-details-left" style="direction: ltr">
                 <span id="new">{{$product['status']->name}}</span>
                 <div class="product-details-images slider-navigation-1">
                     @foreach ($product['images'] as $image)
