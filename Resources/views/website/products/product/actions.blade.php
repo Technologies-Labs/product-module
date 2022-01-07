@@ -13,16 +13,14 @@
             @can('product-edit')
             <li>
                 <a target="_blank" href="{{ route('edit.product.page', ['product' => $product]) }}">
-                    <i class="icofont-pen-alt-1"></i>Edit Post <span>Edit This Post within a Hour</span>
+                    <i class="icofont-pen-alt-1"></i>تعديل
                 </a>
             </li>
             @endcan
 
             @can('product-delete')
             <li wire:click='delete'>
-                <i class="icofont-ui-delete"></i>Delete Post
-                <span>If inappropriate Post By
-                    Mistake</span>
+                <i class="icofont-ui-delete"></i>حذف
             </li>
             @endcan
 
