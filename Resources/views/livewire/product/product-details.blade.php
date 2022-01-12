@@ -80,9 +80,9 @@
                     {!!$product['product']->description!!}
                 </p>
                 <ul class="item-info">
-                    <li><span>Category : </span> <a>{{$product['category']->name}}</a></li>
-                    <li><span>Quantity : </span> {{$product['product']->count}}</li>
-                    <li><span>Status : </span> {{$product['status']->name}} </li>
+                    <li><span>الصنف : </span> <a>{{$product['category']->name}}</a></li>
+                    <li><span>الكمية : </span> {{$product['product']->count}}</li>
+                    <li><span>حالة المنتج : </span> {{$product['status']->name}} </li>
                 </ul>
 
                 <div class="sale-button">
@@ -120,8 +120,8 @@
 
     </div>
     <ul class="nav nav-tabs post-detail-btn" id="details">
-        <li class="nav-item"><a class="active" href="#desc" data-toggle="tab">Details</a></li>
-        <li class="nav-item"><a class="" href="#comment" data-toggle="tab">Comments</a></li>
+        <li class="nav-item ml-3"><a class="active" href="#desc" data-toggle="tab">تفاصيل</a></li>
+        <li class="nav-item"><a class="" href="#comment" data-toggle="tab">التعليقات</a></li>
     </ul>
 
     <div class="tab-content" style="padding: 0 30px">

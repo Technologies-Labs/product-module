@@ -67,13 +67,6 @@ use Modules\Product\Enum\ProductEnum;
     <div class="gap">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
-                    <aside class="sidebar">
-                        @livewire('advertisement::position-advertisements', ['position' => Modules\Advertisement\Enum\AdvertisementPositionEnum::SIDEBAR])
-
-                    </aside>
-
-                </div>
                 <div class="col-lg-8">
                     <div class="main-wraper">
                         <h4 class="main-title">
@@ -90,11 +83,11 @@ use Modules\Product\Enum\ProductEnum;
                                 <fieldset class="row merged-10">
                                     <div class="mb-4 col-lg-12 col-md-12 col-sm-12">
                                         <input class="uk-input" value="{{$edit ? $product->name : old('name')}}"
-                                            name="name" type="text" placeholder="Product Name">
+                                            name="name" type="text" placeholder="اسم المنتج">
                                     </div>
                                     <div class="uk-margin col-lg-6 mb-4">
                                         <select name="category_id" class="uk-select">
-                                            <option>Category</option>
+                                            <option>الصنف</option>
                                             @foreach ($categories as $category)
                                             <option value="{{$category->id}}" @if ($edit && $category->id ==
                                                 $product->category_id) selected @endif>{{$category->name}}</option>
@@ -103,7 +96,7 @@ use Modules\Product\Enum\ProductEnum;
                                     </div>
                                     <div class="uk-margin col-lg-6 mb-4">
                                         <select name="product_status_id" class="uk-select">
-                                            <option>Status</option>
+                                            <option>حالة المنتج</option>
                                             @foreach ($statuses as $statuse)
                                             <option value="{{$statuse->id}}" @if ($edit && $statuse->id ==
                                                 $product->product_status_id) selected @endif>{{$statuse->name}}</option>
@@ -113,13 +106,13 @@ use Modules\Product\Enum\ProductEnum;
 
                                     <div class="mb-4 col-lg-6 col-md-6 col-sm-6">
                                         <input class="uk-input" value="{{$edit ? $product->price : old('price')}}"
-                                            name="price" type="number" placeholder="Price">
+                                            name="price" type="number" placeholder="السعر">
                                     </div>
 
                                     <div class="mb-4 col-lg-6 col-md-6 col-sm-6">
                                         <input class="uk-input"
                                             value="{{$edit ? $product->old_price : old('old_price')}}" name="old_price"
-                                            type="number" placeholder="Old Price">
+                                            type="number" placeholder="السعر القديم">
                                     </div>
 
                                     <div class="mb-4 col-lg-6 col-md-6 col-sm-6">
@@ -130,11 +123,11 @@ use Modules\Product\Enum\ProductEnum;
 
                                     <div class="mb-4 col-lg-6 col-md-6 col-sm-6">
                                         <input class="uk-input" value="{{$edit ? $product->count : old('count')}}"
-                                            name="count" type="number" placeholder="Quantity">
+                                            name="count" type="number" placeholder="الكمية">
                                     </div>
 
                                     <div class="mt-2 col-lg-12">
-                                        <h6 class="mb-2">Main Product Image</h6>
+                                        <h6 class="mb-2">الصورة الرئيسيه للمنتج</h6>
                                         <div class="dropzone mb-1">
                                             <div class="fallback">
                                                 <input name="image" value="{{$edit ? $product->image : old('image')}}"
@@ -149,7 +142,7 @@ use Modules\Product\Enum\ProductEnum;
                                     </div>
 
                                     <div class="mt-2 col-lg-12">
-                                        <h6 class="mb-2">Product Images</h6>
+                                        <h6 class="mb-2">الصور الفرعيه للمنتج</h6>
                                         <div class="dropzone mb-1">
                                             <div class="fallback">
                                                 <input name="product_images[]" type="file" multiple />
@@ -164,7 +157,7 @@ use Modules\Product\Enum\ProductEnum;
 
 
                                     <div class="mt-4 mb-4 col-lg-12">
-                                        <h6 class="mb-1">Description</h6>
+                                        <h6 class="mb-1">الوصف</h6>
                                         <textarea name="description"
                                             value="{{$edit ? $product->description : old('description')}}"
                                             placeholder="Description" rows="4" class="uk-textarea ckeditor-description">
@@ -173,7 +166,7 @@ use Modules\Product\Enum\ProductEnum;
                                     </div>
 
                                     <div class="mt-4 mb-4 col-lg-12">
-                                        <h6 class="mb-2">Details</h6>
+                                        <h6 class="mb-2">تفاصيل المنتج</h6>
                                         <textarea name="details" value="{{$edit ? $product->details : old('details')}}"
                                             placeholder="Details" rows="4" class="uk-textarea ckeditor-details">
                                             {{$edit ? $product->details :null }}
@@ -192,16 +185,23 @@ use Modules\Product\Enum\ProductEnum;
                                     </div>
                                 </div>
                                 <div class="mt-3 col-lg-12">
-                                    <button type="submit" class="button primary circle">Publish</button>
+                                    <button type="submit" class="button primary circle">حفظ</button>
                                 </div>
                             </form>
-                            <p>
+                            {{-- <p>
                                 <b>Special Note:</b>
                                 "But I must explain to you how all this mistaken idea of denouncing pleasure and
                                 praising pain was born and I will give you a complete account of the system,
-                            </p>
+                            </p> --}}
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-4">
+                    <aside class="sidebar">
+                        @livewire('advertisement::position-advertisements', ['position' => Modules\Advertisement\Enum\AdvertisementPositionEnum::SIDEBAR])
+
+                    </aside>
+
                 </div>
             </div>
         </div>

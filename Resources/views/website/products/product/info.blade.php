@@ -18,4 +18,4 @@
 
 @endif
 
-<a  title="" href="#" class="comment-to"><i class="icofont-comment"></i> Comment</a>
+<a  title="" href="#" class="comment-to"><i class="icofont-comment"></i> تعليق</a>

@@ -2,7 +2,7 @@
     use Modules\Product\Enum\ProductEnum;
 @endphp
 <figure id="main">
-    <img src="{{asset('storage')}}/{{ProductEnum::IMAGE}}{{$product->image}}" alt="">
+    <a href="{{route('show.product',$product)}}"><img src="{{asset('storage')}}/{{ProductEnum::IMAGE}}{{$product->image}}" alt=""></a>
 </figure>
 <a href="{{route('show.product',$product)}}" class="post-title" target="_blank">{{$product->name}}</a>
 <div class="details">
